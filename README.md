@@ -33,6 +33,27 @@ Or you can follow my steps in your terminal:
 - (optional) remove the Label folders in train,validation and test folders
 - now, your `OIDv4_ToolKit/OID/Dataset/` folder is ready to use
 
+## How I created the other related files
+**obj.names**  
+Put the class name(s) into this file line by line. In our case, it is just a single line of the word 'taxi'.  
+![alt text](https://raw.githubusercontent.com/WoradeeKongthong/training_YOLOv4_for_taxi_detection/main/assets/objnames.png)
+
+**obj.data**  
+You can change number of classes you are going to train (line 1) and where you want to keep your backup while training in google colab (line 4).  
+You should leave the train, valid and names as the same.  
+![alt text](https://raw.githubusercontent.com/WoradeeKongthong/training_YOLOv4_for_taxi_detection/main/assets/objdata.png)
+
+**yolov4-obj.cfg**  
+You can edit your config file as the following recommendation.  
+(I got this recommendation from https://www.youtube.com/watch?v=mmj3nxGT2YQ&t=876s)  
+- `batch = 64`
+- `subdivisions = 16` (or 32)
+- `max_batches = number_of_class * 2000` (but no less than 6000)
+- `steps = 80% of max_batches, 90% of max_batches` 
+- `class = number_of_classes` *(in 3 [yolo]s)*
+- `filters = (number_of_classes + 5) * 3` *(in 3 [convolutional]s before each [yolo])*
+- `random = 1` (if `random = 0` will speed up training but slightly reduce accuracy)
+
 ## How to train the YOLOv4
 **training_YOLOv4_for_taxi_detection.ipynb**  
 In this notebook, I train the YOLOv4 model on one class dataset which is Taxi datset.  
